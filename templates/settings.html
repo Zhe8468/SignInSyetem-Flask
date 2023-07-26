@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <h2>个人设置</h2>
+{% endblock %}
+
+{% block body %}
+    <div class="col-md-12">
+       <div class="white_shd full margin_bottom_30">
+          <div class="full graph_head">
+              {% for message in get_flashed_messages() %}
+                  <div class="alert alert alert-success" role="alert">
+                   {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+              {% endfor %}
+
+             <div class="heading1 margin_0">
+                <h2 style="display: inline-block;">{{ user.username }}的个人设置</h2>
+             </div>
+          </div>
+           <form action="{{ url_for("signin.settings") }}" method="post" class="padding_infor_info">
+               <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+               <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">ID</label>
+                <div class="col-sm-10">
+                  <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ user_id }}">
+                </div>
+              </div>
+               <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">用户名</label>
+                <div class="col-sm-10">
+                  <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ username }}">
+                </div>
+              </div>
+               <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">邮箱</label>
+                <div class="col-sm-10">
+                  <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ email }}">
+                </div>
+              </div>
+               <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">注册时间</label>
+                <div class="col-sm-10">
+                  <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ join_time }}">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">修改密码</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control col-sm-3" id="inputPassword" name="password">
+                </div>
+              </div>
+               <div class="form-group row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">重复密码</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control col-sm-3" id="inputPassword" name="confirm_password">
+                </div>
+              </div>
+               <button type="submit" class="btn btn-success pull-right">确认修改</button>
+           </form>
+
+       </div>
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    <li>
+        <a href="{{ url_for("signin.tables") }}">
+        <i class="fa fa-table purple_color2"></i> <span>签到记录</span></a>
+    </li>
+     <li>
+        <a href="{{ url_for("signin.contact") }}">
+        <i class="fa fa-paper-plane red_color"></i> <span>意见反馈</span></a>
+     </li>
+    <li style="background:#f3f3f3;">
+        <a href="{{ url_for("signin.settings") }}">
+        <i class="fa fa-cog yellow_color"></i> <span>个人设置</span></a>
+    </li>
+{% endblock %}

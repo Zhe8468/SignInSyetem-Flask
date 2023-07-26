@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+	<title>登录</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!--图标-->
+	<link rel="stylesheet" type="text/css" href="../static/login/css/font-awesome.min.css">
+
+
+	<!--布局框架-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for("static",filename="/login/css/bootstrap4.6.css") }}">
+	<link rel="stylesheet" type="text/css" href="../static/login/css/util.css">
+
+	<!--主要样式-->
+	<link rel="stylesheet" type="text/css" href="../static/login/css/main.css">
+
+    <!-- 图标 -->
+    <link rel="icon" href="../static/login/img/logo.png" type="image/png" />
+</head>
+
+<body>
+
+<div class="login">
+	<div class="container-login100">
+		<div class="wrap-login100">
+			<div class="login100-pic js-tilt" data-tilt>
+                <a href="{{ url_for("users.login") }}">
+				    <img src="../static/login/img/logo.png" alt="IMG">
+                </a>
+			</div>
+
+			<form class="login100-form validate-form" method="post" action="{{ url_for("users.login") }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+				<span class="login100-form-title">
+					学生之家社团签到系统登录
+				</span>
+
+				<div class="wrap-input100 validate-input">
+					<input class="input100" type="text" name="email" placeholder="邮箱">
+					<span class="focus-input100"></span>
+					<span class="symbol-input100">
+						<i class="fa fa-envelope" aria-hidden="true"></i>
+					</span>
+				</div>
+
+				<div class="wrap-input100 validate-input">
+					<input class="input100" type="password" name="password" placeholder="密码">
+					<span class="focus-input100"></span>
+					<span class="symbol-input100">
+						<i class="fa fa-lock" aria-hidden="true"></i>
+					</span>
+				</div>
+
+				<div class="container-login100-form-btn">
+                    <button type="submit" class="login100-form-btn">立即登录</button>
+                </div>
+                <div class="container-login100-form-btn">
+					<a class="login100-form-btn" href="{{ url_for("users.register") }}">
+						注册
+					</a>
+				</div>
+                {% for message in get_flashed_messages() %}
+                  <div class="alert alert alert-danger m-t-5" role="alert">
+                   {{ message }}
+                  </div>
+              {% endfor %}
+			</form>
+
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

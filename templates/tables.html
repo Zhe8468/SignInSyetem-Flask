@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <h2>签到记录</h2>
+{% endblock %}
+{% block body %}
+    <!-- 表格区域 -->
+    <div class="col-md-12">
+       <div class="white_shd full margin_bottom_30">
+          <div class="full graph_head">
+              {% for message in get_flashed_messages() %}
+                  <div class="alert alert alert-success" role="alert">
+                   {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+              {% endfor %}
+
+             <div class="heading1 margin_0">
+                <h2 style="display: inline-block;">{{ user.username }}的签到记录</h2>
+             </div>
+              <form action="{{ url_for("signin.tables") }}" method="post">
+                  <button type="submit" class="btn btn-primary ml-2">签到</button>
+              </form>
+          </div>
+          <div class="table_section padding_infor_info">
+             <div class="table-responsive-sm">
+                <table class="table table-hover">
+                   <thead>
+                      <tr>
+                         <th>签到时间</th>
+                         <th>签到课程</th>
+                         <th>签到情况</th>
+                      </tr>
+                   </thead>
+                   <tbody>
+                   {% for content in tb_content %}
+                       <tr>
+                         <td>{{ content.create_time }}</td>
+                         <td>{{ content.course_name }}</td>
+                         <td>{{ content.state }}</td>
+                      </tr>
+                   {% endfor %}
+                   </tbody>
+                </table>
+             </div>
+          </div>
+       </div>
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    <li style="background:#f3f3f3;">
+        <a href="{{ url_for("signin.tables") }}">
+        <i class="fa fa-table purple_color2"></i> <span>签到记录</span></a>
+    </li>
+     <li>
+        <a href="{{ url_for("signin.contact") }}">
+        <i class="fa fa-paper-plane red_color"></i> <span>意见反馈</span></a>
+     </li>
+    <li>
+        <a href="{{ url_for("signin.settings") }}">
+        <i class="fa fa-cog yellow_color"></i> <span>个人设置</span></a>
+    </li>
+{% endblock %}

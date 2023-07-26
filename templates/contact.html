@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <h2>意见反馈</h2>
+{% endblock %}
+
+{% block body %}
+    <div class="col-md-12">
+       <div class="white_shd full margin_bottom_30">
+          <div class="full graph_head">
+              {% for message in get_flashed_messages() %}
+                  <div class="alert alert alert-success" role="alert">
+                   {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+              {% endfor %}
+
+             <div class="heading1 margin_0">
+                <h2 style="display: inline-block;">{{ user.username }}的留言板</h2>
+             </div>
+          </div>
+           <form action="{{ url_for("signin.contact") }}" method="post" class="padding_infor_info">
+               <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+               <div class="form-group">
+                <label for="exampleFormControlTextarea1">你可以在这里给我们留言，对这个系统有什么意见，或者发现了什么Bug...</label>
+                <textarea class="form-control mb-4" id="exampleFormControlTextarea1" rows="18" name="content"></textarea>
+                <button type="submit" class="btn btn-primary pull-right">发送！</button>
+              </div>
+           </form>
+       </div>
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    <li>
+        <a href="{{ url_for("signin.tables") }}">
+        <i class="fa fa-table purple_color2"></i> <span>签到记录</span></a>
+    </li>
+     <li style="background:#f3f3f3;">
+        <a href="{{ url_for("signin.contact") }}">
+        <i class="fa fa-paper-plane red_color"></i> <span>意见反馈</span></a>
+     </li>
+    <li>
+        <a href="{{ url_for("signin.settings") }}">
+        <i class="fa fa-cog yellow_color"></i> <span>个人设置</span></a>
+    </li>
+{% endblock %}

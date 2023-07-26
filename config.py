@@ -1,0 +1,26 @@
+'''
+配置文件
+'''
+# DEBUG = True
+
+# 数据库配置
+HOSTNAME = '81.71.149.84'
+PORT     = '3306'
+DATABASE = 'qdxt'
+USERNAME = 'qdxt'
+PASSWORD = 'xszj2022'
+DB_URI = 'mysql+pymysql://{}:{}@{}:{}/{}'.format(USERNAME,PASSWORD,HOSTNAME,PORT,DATABASE)
+SQLALCHEMY_DATABASE_URI = DB_URI
+SQLALCHEMY_TRACK_MODIFICATIONS = True
+SECRET_KEY = "jsfodafouhfiwueafhiwehfasduinafsbdvsa"
+# 邮箱服务相关配置
+MAIL_SERVER = "smtp.163.com"
+MAIL_PORT = 465
+MAIL_USE_TLS = False
+MAIL_USE_SSL = True
+MAIL_USERNAME = "13553748468@163.com"
+# 授权码 勿删！！！
+MAIL_PASSWORD = "EFTQMAMQXIXNSSXQ"
+MAIL_DEFAULT_SENDER = "13553748468@163.com"
+# CSRF
+WTF_CSRF_CHECK_DEFAULT = False

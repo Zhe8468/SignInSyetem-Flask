@@ -1,0 +1,95 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+    <h2>学生列表</h2>
+{% endblock %}
+
+{% block body %}
+    <div class="col-md-12">
+       <div class="white_shd full margin_bottom_30">
+          <div class="full graph_head">
+              {% for message in get_flashed_messages() %}
+                  <div class="alert alert alert-success" role="alert">
+                   {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+              {% endfor %}
+
+             <div class="heading1 margin_0">
+                <h2 style="display: inline-block;">开始上课</h2>
+             </div>
+          </div>
+           <form action="{{ url_for("admin.class_begin") }}" method="post" class="padding_infor_info">
+               <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+               <div class="form-group row">
+                      <select class="form-control col-sm-2 ml-2" name="course_name">
+                      <option>Python</option>
+                      <option>PS</option>
+                      <option>PR</option>
+                      <option>Vocaloid</option>
+                    </select>
+                     <button type="submit" class="btn btn-primary col-sm-1 ml-2">开始上课</button>
+                  </div>
+           </form>
+       </div>
+    </div>
+    <div class="col-md-12">
+       <div class="white_shd full margin_bottom_30">
+          <div class="full graph_head">
+              {% for message in get_flashed_messages() %}
+                  <div class="alert alert alert-success" role="alert">
+                   {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+              {% endfor %}
+
+             <div class="heading1 margin_0">
+                <h2 style="display: inline-block;">学生列表</h2>
+             </div>
+          </div>
+           <div class="table_section padding_infor_info">
+             <div class="table-responsive-sm">
+                <table class="table table-hover">
+                   <thead>
+                      <tr>
+                         <th>ID</th>
+                         <th>用户名</th>
+                         <th>邮箱</th>
+                         <th>注册时间</th>
+                      </tr>
+                   </thead>
+                   <tbody>
+                   {% for stu in stus %}
+                       <tr>
+                         <td>{{ stu.id }}</td>
+                         <td>{{ stu.username }}</td>
+                         <td>{{ stu.email }}</td>
+                         <td>{{ stu.join_time }}</td>
+                      </tr>
+                   {% endfor %}
+                   </tbody>
+                </table>
+             </div>
+          </div>
+       </div>
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    <li style="background:#f3f3f3;">
+        <a href="{{ url_for("admin.students") }}">
+        <i class="fa fa-table purple_color2"></i> <span>学生列表</span></a>
+    </li>
+     <li>
+        <a href="{{ url_for("admin.signins") }}">
+        <i class="fa fa-paper-plane red_color"></i> <span>签到列表</span></a>
+     </li>
+    <li>
+        <a href="{{ url_for("admin.contact_board") }}">
+        <i class="fa fa-cog yellow_color"></i> <span>留言板</span></a>
+    </li>
+{% endblock %}
